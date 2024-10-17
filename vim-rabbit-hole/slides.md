@@ -7,16 +7,21 @@ highlighter: shiki
 drawings:
   persist: false
 transition: slide-left
-layout: intro
 
 ---
 
-<h1 text="!4xl">come with vim in the rabbit hole! :q</h1>
+<div class="flex flex-col gap-2 h-full">
+<div class="flex flex-col gap-2 items-center justify-center h-full">
+<h1 text="!5xl">come with vim in the rabbit hole! :q</h1>
 
-<div>Curious about Vim's reputation as a powerful editor? <br>
-Join me for a hands-on exploration of modal editing. <br>
-We'll break down the intuitive concepts, test your knowledge with a quiz, and witness the magic of Vim in action.<br>
-<strong>Let's dispel the myth that Vim is only for "elite" programmers.</strong>
+<div class="text-sm opacity-50">Let's dispel the myth that Vim is only for "elite" programmers.</div>
+<div text="!2xl">lucatrazzi</div>
+</div>
+
+<div class="text-align-right">
+<div><strong>voxxed</strong> days <strong>@lugano</strong></div>
+<div class="text-sm opacity-50">22/01/2024</div>
+</div>
 </div>
 
 ---
@@ -26,8 +31,9 @@ We'll break down the intuitive concepts, test your knowledge with a quiz, and wi
 <div grid="~ cols-2 gap-2 justify-items-center items-center" m="t-2">
 <div class="leading-8 opacity-80">
 works at @adesso schweiz at in lugano<br>
-husband and proud father of 2 kids<br>
-loves to dance with the code<br>
+<strong>husband</strong> and proud <strong>father</strong> of 2 kids<br>
+loves to <strong>dance</strong> with the code<br>
+works with <strong>dotnet</strong>, <strong>frontend</strong> and <strong>golang</strong><br>
 </div>
 
 <img src="/assets/images/photo.jpg" class="rounded-full w-40"/>
@@ -35,25 +41,27 @@ loves to dance with the code<br>
 
 ---
 
-<h1>what - is this talk about</h1>
-<div grid="~ cols-2 gap-2 justify-items-center items-center" m="t-2">
+<h1>what is this talk about</h1>
+<div grid="~ cols-2 gap-2 justify-items-center items-center" class="h-100">
 <div>
-it's a text editor
+<br>
+it's ugly and scary <img src = "/assets/images/scary.svg" alt="scary" class="inline w-6"/>
 
-and it's ugly and scary :scary-face:
+today we are <strong>not</strong> gonna speak about this
 
-today we are not gonna speak about this
-
-but about what makes vim efficient and natural
+but about what makes vim <strong>efficient</strong> and <strong>natural</strong>
 
 **modal editing** and his **natural language**
 </div>
 
+<div class="relative">
 <img
   src="/assets/images/vim.png"
   alt="lt"
   border="rounded"
 />
+<img src = "/assets/images/scary.svg" alt="scary" class="w-10 absolute bottom-0 right-0 mr-2 mb-2"/>
+</div>
 </div>
 
 
@@ -63,55 +71,102 @@ we are not gonna speak about the "program" but about the editor mordal
 
 ---
 
-<h1>what - is this talk about</h1>
+<h1>what is this talk about</h1>
 
-(pic of intellij, vscode, chrome, zathura, obsidian)
+<div class="flex flex-col gap-2 items-center justify-center text-align-center">
+<img
+  src="/assets/images/apps.webp"
+  class="w-120"
+  alt="lt"
+  border="rounded"
+/>
 
-are you aware that these programs can have vim enabled?
+<h3>are you aware that these programs can have vim enabled?</h3>
+</div>
 
 --- 
 
 <h1>the keyboard is our brush</h1>
 
-developers are like artists.
+<div grid="~ cols-2 gap-2 justify-items-center items-center" m="t-2">
+<div class="leading-8 opacity-80">
+developers are like <strong>artists</strong>
 
-artists don't press constantly the brush to the canvas.
+artists don't press <strong>constantly</strong> the brush to the canvas
 
-they think, they look, they move, and sometimes they draw a line, or a hue.
+they <strong>think</strong>, they <strong>look</strong>, they <strong>move</strong>, and sometimes they draw a line
 
-the keyboard is our **brush**.
+why use the keyboards only to write <strong>code</strong>
 
-it's a waste to use the keyboards only to draw lines, 
+when most of our time is passed navigating the <strong>code</strong>
 
-when most of our time is passed navigating the code.
+<i text=!2xl>the keyboard is our <strong>brush</strong></i>
 
-<img src="https://www.sspaeti.com/blog/why-using-neovim-data-engineer-and-writer-2023/weel-too-busy.png" class="w-40"/>
+</div>
 
-
----
-
-<h1>video time</h1>
-
-<div class="flex justify-center">
-  <video width="640" height="360" controls>
-    <source src="/assets/videos/quiz.mp4" type="video/mp4">
-  </video>
+<img src="https://www.sspaeti.com/blog/why-using-neovim-data-engineer-and-writer-2023/weel-too-busy.png" class="rounded-full w-80"/>
 </div>
 
 ---
 layout: center
 ---
 
-<h1>quiz time</h1>
+<h1 text="!6xl">quiz time</h1>
+
+<!-- claper todo -->
+---
+
+<h1>vim grammar - verbs (operators)</h1>
+
+<div>
+Just as spoken language grammar has <strong>verbs</strong>, <strong>adjectives</strong> and <strong>subjects</strong>, so does the vim grammar.
+
+The grammar has different <strong>verbs</strong> to begin with:
+
+<ul>
+<li>Copying (or <strong>y</strong>anking) in Vim with <strong>y</strong></li>
+<li><strong>d</strong>eleting with <strong>d</strong></li>
+<li><strong>p</strong>asting with <strong>p</strong></li>
+<li><strong>c</strong>hanging with <strong>c</strong></li>
+<li><strong>f</strong>finding with <strong>f</strong></li>
+<li>..more</li>
+</ul>
+
+<strong>Verbs</strong> can do nothing alone, they need a followup, a <strong>subject</strong>.
+</div>
 
 ---
 
+<h1>vim grammar - subjects (motions)</h1>
 
-<h1>vim grammar</h1>
+<div>
+Next, we can add motions. Each <strong>verb</strong> takes a <strong>subject</strong> for their action. 
 
-Just as spoken language grammar has **verbs**, **subjects**, and **objects**, so does the Vim grammar.
+<ul>
+<li>numbers</li>
+<li><strong>w</strong>ords</li>
+<li><strong>b</strong>back - beginning of previous word</li>
+<li>..more</li>
+</ul>
 
-https://www.freecodecamp.org/news/vim-language-and-motions-explained/
+--- 
+
+<h1>vim grammar - adjectives and count</h1>
+
+<div>
+The count allows you to multiply the effect of your <strong>verb</strong> a count number of times.
+
+the adjectives is inner and around tbd
+</div>
+
+---
+
+<h1>vim grammar - composability</h1>
+
+{verb}{count}{adjective}{subject} => {operator}{count}{adjective}{motion}
+{count}{verb}{adjective}{subject} => {count}{operator}{adjective}{motion}
+
+---
 
 Most commands come in two, three or four parts. One version of the three-part structure goes like this: operator — text object — motion.
 
@@ -122,6 +177,8 @@ Most commands come in two, three or four parts. One version of the three-part st
 There’s a ton of different motions but we’ll get into that in a second, for now we can think of the motion as a kind of target for the command. To take an example I could press dib, meaning delete inside block.
 
 The operator is delete, the text object is inside and the motion is block. This deletes everything inside a block of (parentheses).
+
+<!-- mention the abscence of "shortcuts" -->
 
 --- 
 
@@ -134,10 +191,11 @@ what is modal editor
 **Visual** mode is unique, the same as highlighting text with the mouse, but with the above Vim motions.
 
 ---
+layout: center
+---
 
-<h1>it gamifies coding</h1>
+<h1 text="!6xl">modal editing demo time</h1>
 
-sometime the job is boring
 
 ---
 
@@ -200,13 +258,17 @@ citvim
 <div v-click="5">dst</div>
 <div v-click="7">citvim</div>
 
+---
+
+<h1>it gamifies coding</h1>
+
+sometime the job is boring
 
 ---
 
-<h1>the macro demo</h1>
+<h1 text="!6xl">macro demo time</h1>
 
-show live action of a macro, using registers, for a repetive action
-
+<!-- show live action of a macro, using registers, for a repetive action -->
 ---
 
 <h1>extra mile</h1>
@@ -225,5 +287,6 @@ taks runner etc
 
 [why-vim-is-better-than-vscode-d09e2355eb37](https://sean-warman.medium.com/why-vim-is-better-than-vscode-d09e2355eb37)
 [vim-language-and-motions-explained](https://www.freecodecamp.org/news/vim-language-and-motions-explained/)
+[editing-like-magic-with-vim-operators](https://www.barbarianmeetscoding.com/boost-your-coding-fu-with-vscode-and-vim/editing-like-magic-with-vim-operators)
 
 [GitHub](https://github.com/lucax88x/slides)
