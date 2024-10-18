@@ -148,6 +148,7 @@ Next, we can add motions. Each <strong>verb</strong> takes a <strong>subject</st
 <li><strong>b</strong>back - beginning of previous word</li>
 <li>..more</li>
 </ul>
+</div>
 
 --- 
 
@@ -164,7 +165,7 @@ the adjectives is inner and around tbd
 <h1>vim grammar - composability</h1>
 
 {verb}{count}{adjective}{subject} => {operator}{count}{adjective}{motion}
-{count}{verb}{adjective}{subject} => {count}{operator}{adjective}{motion}
+{count}{verb}{adjective}{subject} => {count}{operator}kadjective}{motion}
 
 ---
 
