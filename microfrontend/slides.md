@@ -25,7 +25,7 @@ transition: slide-left
 
 ---
 
-<h1>micro-frontend</h1>
+<h1>microfrontend</h1>
 
 <div class="flex flex-col items-center gap-2">
 <img src="/assets/images/architecture.webp" alt="arch" class="w-120"></img>
@@ -92,7 +92,7 @@ lead to heavy revenue loss.
 ---
 
 <div class="flex flex-col h-full gap-2 justify-center">
-<center v-click>
+<center>
 <strong text="!3xl">TLDR</strong>
 </center>
 
@@ -108,12 +108,6 @@ lead to heavy revenue loss.
 <strong text="!3xl">there's still a 10% when it's worth</strong>
 </center>
 </div>
-
----
-
-<h1>federation</h1>
-
-TBD
 
 ---
 
@@ -136,12 +130,31 @@ TBD
 
 <li>shared
 <ul>
-<li>react 1</li>
-<li>angular 2</li>
+<li>typescript lib</li>
 </ul>
 </li>
 
 </ul>
+
+---
+
+<h1>techs showcase</h1>
+
+<div class="flex gap-2 items-center justify-evenly">
+<div>
+<ul>
+<li>vite (esbuild + rollup)</li>
+<li>vite module federation</li>
+<li>pnpm</li>
+<li>lit</li>
+<li>storybook</li>
+<li>react + angular</li>
+</ul>
+</div>
+<div>
+<img src="/assets/images/time-to.gif" alt="stop" class="w-60"></img>
+</div>
+</div>
 
 ---
 
