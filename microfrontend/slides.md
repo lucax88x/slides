@@ -19,7 +19,7 @@ transition: slide-left
 
 <div class="text-align-right">
 <div><strong>adesso</strong> <strong>@lugano</strong></div>
-<div class="text-sm opacity-50">06/08/2024</div>
+<div class="text-sm opacity-50">06/11/2024</div>
 </div>
 </div>
 
@@ -75,7 +75,7 @@ lead to heavy revenue loss.
 
 ---
 
-<h1>it's not all sunshines and roses</h1>
+<h1>it's not all puppies and unicorns</h1>
 
 <div>
 
@@ -155,6 +155,38 @@ lead to heavy revenue loss.
 <img src="/assets/images/time-to.gif" alt="stop" class="w-60"></img>
 </div>
 </div>
+
+---
+
+<h1>bonus: federation</h1>
+
+<div class="flex gap-2 items-center justify-evenly">
+module federation and native federation (import maps?)
+<div>
+<img src="/assets/images/another.webp" alt="stop" class="w-60"></img>
+</div>
+</div>
+
+---
+
+<h1>import maps</h1>
+
+```html
+<script type="importmap">
+{
+    "imports": {
+        "date-fns": "./libs/date-fns.js",
+        "is-long-weekend": "./js/is-long-weekend.mjs",
+        "is-bridging-day": "./js/is-bridging-day.mjs"
+    },
+    "scopes": {
+        "/js/is-bridging-day.mjs": {
+            "date-fns": "./libs/other-date-fns.js"
+        }
+    }
+}
+</script>
+```
 
 ---
 
