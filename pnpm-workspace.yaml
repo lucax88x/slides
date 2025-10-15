@@ -1,0 +1,5 @@
+packages:
+  - 'diagram-as-code'
+  - 'microfrontend'
+  - 'vim-rabbit-hole'
+  - 'why-no-microfrontend'

@@ -1,10 +1,10 @@
 {
-  "name": "vim-rabbit-hole",
+  "name": "why-no-microfrontend",
   "type": "module",
   "private": true,
   "scripts": {
     "build": "slidev build",
-    "dev": "slidev --open --port 3032",
+    "dev": "slidev --open --port 3033",
     "export": "slidev export"
   }
 }

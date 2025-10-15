@@ -1,0 +1,20 @@
+{
+  "name": "slides-monorepo",
+  "private": true,
+  "scripts": {
+    "start": "pnpm -r --parallel run dev",
+    "build": "pnpm -r run build"
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.2.5",
+    "@slidev/theme-apple-basic": "^0.25.1",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.22"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
