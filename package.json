@@ -2,7 +2,8 @@
   "name": "slides-monorepo",
   "private": true,
   "scripts": {
-    "start": "pnpm -r --parallel run dev",
+    "start": "pnpm run dev",
+    "dev": "pnpm -r --parallel run dev",
     "build": "pnpm -r run build"
   },
   "devDependencies": {

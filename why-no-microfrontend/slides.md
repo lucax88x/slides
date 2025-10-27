@@ -5,7 +5,7 @@ theme: seriph
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
 # some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: Why you shouldn't use microfrontends
 info: |
   ## Slidev Starter Template
   Presentation slides for developers.
@@ -22,9 +22,9 @@ transition: slide-left
 mdc: true
 ---
 ---
+
 <div class="pt-12">
-  <span class="text-5xl font-bold">Microfrontends</span>
-  <p class="text-2xl mt-4 opacity-75">The Good, The Bad, and The Federation</p>
+  <p class="text-2xl mt-4 opacity-75">Why you shouldn't use microfrontends</p>
 </div>
 
 <div class="abs-br m-6 flex gap-2">
@@ -34,36 +34,10 @@ mdc: true
 </div>
 
 ---
-layout: default
----
-
-# Agenda
-
-<div class="grid grid-cols-2 gap-4">
-<div>
-
-1.  **The Problem**: The Crisis of the Frontend Monolith
-2.  **The Promise**: What is a Microfrontend?
-3.  **The Harsh Reality**: Why You (Often) Shouldn't Use Them
-</div>
-<div>
-
-4.  **The Modern Solution**: Module Federation
-5.  **Case Study**: Our Journey at [Project Name]
-6.  **The Future**: A Glimpse at Rolldown
-</div>
-</div>
-
-<br>
-<br>
-
-<p class="opacity-75">Spoiler: there's no simple answer.</p>
-
----
 layout: two-cols
 ---
 
-# 1. The Crisis of the Frontend Monolith
+# The Crisis of the Frontend Monolith
 
 ### The "Big Ball of Mud"
 
@@ -89,7 +63,7 @@ A single, huge Single Page Application (SPA) that contains everything.
 layout: default
 ---
 
-# 2. The Promise: Microfrontends
+# The Promise: Microfrontends
 
 > An architectural style where front-end applications are composed of **smaller, independent, and autonomously deployable pieces**.
 
@@ -129,7 +103,7 @@ layout: default
 layout: default
 ---
 
-# 3. The Harsh Reality: The Complications
+# The Harsh Reality: The Complications
 
 Microfrontends don't *reduce* complexity. They **shift** and **organize** it.
 
@@ -167,7 +141,7 @@ Microfrontends don't *reduce* complexity. They **shift** and **organize** it.
 layout: default
 ---
 
-# 4. A Modern Solution: Module Federation
+# A Modern Solution: Module Federation
 
 A feature introduced in Webpack 5 that changes the game.
 
@@ -207,7 +181,7 @@ layout: two-cols
 
 Let's see how a **Host** app loads a component from a **Remote** app.
 
-::left::
+::right::
 
 ### "Remote" App (localhost:3001)
 Exposes its `Button` component.
@@ -222,4 +196,5 @@ new ModuleFederationPlugin({
     './Button': './src/Button',
   },
   shared: { react, 'react-dom' },
-}),
+})
+```
