@@ -1,5 +1,9 @@
 packages:
-  - 'diagram-as-code'
-  - 'microfrontend'
-  - 'vim-rabbit-hole'
-  - 'why-no-microfrontend'
+  - "diagram-as-code"
+  - "microfrontend"
+  - "vim-rabbit-hole"
+  - "why-no-microfrontend"
+catalogs:
+  prettier:
+    "prettier": "^3.7.4"
+    "prettier-plugin-slidev": "^1.0.5"

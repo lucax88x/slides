@@ -2,42 +2,23 @@
 theme: apple-basic
 background: false
 title: come with vim in the rabbit-hole :q
-info: todo
 highlighter: shiki
 drawings:
   persist: false
 transition: slide-left
 
 ---
-
-<div class="flex flex-col gap-2 h-full">
-<div class="flex flex-col gap-2 items-center justify-center h-full">
-<h1 text="!5xl">come with vim in the rabbit hole! :q</h1>
-
-<div class="text-sm opacity-50">Let's dispel the myth that Vim is only for "elite" programmers.</div>
-<div text="!2xl">lucatrazzi</div>
-</div>
-
-<div class="text-align-right">
-<div><strong>voxxed</strong> days <strong>@lugano</strong></div>
-<div class="text-sm opacity-50">22/01/2024</div>
-</div>
-</div>
+---
+src: ../shared/start.md
+title: why no microfrontend
+subtitle: Let's dispel the myth that Vim is only for "elite" programmers.
+---
+imported slide
 
 ---
-
-<h1 text="!5xl">luca trazzi</h1>
-
-<div grid="~ cols-2 gap-2 justify-items-center items-center" m="t-2">
-<div class="leading-8 opacity-80">
-works at @adesso schweiz at in lugano<br>
-<strong>husband</strong> and proud <strong>father</strong> of 2 kids<br>
-loves to <strong>dance</strong> with the code<br>
-works with <strong>dotnet</strong>, <strong>frontend</strong> and <strong>golang</strong><br>
-</div>
-
-<img src="/assets/images/photo.jpg" class="rounded-full w-40"/>
-</div>
+src: ../shared/me.md
+---
+imported slide
 
 ---
 

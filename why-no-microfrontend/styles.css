@@ -1,0 +1,12 @@
+.slidev-layout h1,
+h1 {
+  text-align: center;
+}
+
+.slidev-layout {
+  height: 100%;
+}
+
+.slidev-vclick-target {
+  transition-duration: 1000ms;
+}

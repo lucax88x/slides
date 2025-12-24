@@ -3,8 +3,13 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "format": "prettier --write '**/*.{md,slidev,js,json,ts}'",
     "build": "slidev build",
     "dev": "slidev --open --port 3032",
     "export": "slidev export"
+  },
+  "devDependencies": {
+    "prettier": "catalog:prettier",
+    "prettier-plugin-slidev": "catalog:prettier"
   }
 }
