@@ -13,6 +13,11 @@
     "@slidev/theme-seriph": "latest",
     "vue": "^3.5.22"
   },
+  "engines": {
+    "pnpm": ">=10.0.0",
+    "node": ">=20.0.0"
+  },
+  "packageManager": "pnpm@10.18.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"

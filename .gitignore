@@ -7,14 +7,14 @@ node_modules
 .yarn/install-state.gz
 
 # testing
-/coverage
+coverage
 
 # production
-/build
-/dist
+build
+dist
 .next/
 .nuxt/
-/out/
+out/
 
 # misc
 .DS_Store
