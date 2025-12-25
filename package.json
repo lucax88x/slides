@@ -7,11 +7,11 @@
     "build": "pnpm -r run build"
   },
   "devDependencies": {
-    "@slidev/cli": "^52.2.5",
+    "@slidev/cli": "^52.11.1",
     "@slidev/theme-apple-basic": "^0.25.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "vue": "^3.5.22"
+    "vue": "^3.5.26"
   },
   "engines": {
     "pnpm": ">=10.0.0",

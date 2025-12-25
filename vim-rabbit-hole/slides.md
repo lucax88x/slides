@@ -2,24 +2,17 @@
 theme: apple-basic
 background: false
 title: come with vim in the rabbit-hole :q
+subtitle: Let's dispel the myth that Vim is only for "elite" programmers.
 highlighter: shiki
 drawings:
   persist: false
 transition: slide-left
-
----
----
-src: ../shared/start.md
-title: why no microfrontend
-subtitle: Let's dispel the myth that Vim is only for "elite" programmers.
 ---
 imported slide
-
 ---
 src: ../shared/me.md
 ---
 imported slide
-
 ---
 
 <h1>what is this talk about</h1>

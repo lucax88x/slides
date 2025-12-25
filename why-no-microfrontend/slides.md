@@ -2,25 +2,21 @@
 theme: apple-basic
 background: false
 title: why no microfrontends
+subtitle: todo subtitle
 highlighter: shiki
 drawings:
   persist: false
 transition: slide-left
----
----
+layout: center
+class: text-center
 src: ../shared/start.md
-title: why no microfrontends
-subtitle: todo subtitle
 ---
 imported slide
-
 ---
 src: ../shared/me.md
 ---
 imported slide
-
 ---
-class: text-center
 ---
 
 # What is the microfrontends architecture?
@@ -38,6 +34,7 @@ class: text-center
 </div>
 
 ---
+layout: center
 class: text-center
 ---
 
@@ -108,6 +105,7 @@ layout: two-cols
 </v-click>
 
 ---
+layout: center
 class: text-center
 ---
 
@@ -134,6 +132,7 @@ class: text-center
 </div>
 
 ---
+layout: center
 class: text-center
 ---
 
@@ -142,6 +141,7 @@ class: text-center
 <!-- Okay so, also based on the lessons we learned at Post, let's see when I can recommend it or when instead I would probably push you off of the idea to implement it -->
 
 ---
+layout: center
 class: text-center
 ---
 
@@ -185,7 +185,7 @@ class: text-center
 
 
 ---
-hideInToc: true
+layout: center
 class: text-center
 ---
 
@@ -219,7 +219,7 @@ class: text-center
 
 
 ---
-hideInToc: true
+layout: center
 class: text-center
 ---
 
@@ -252,7 +252,7 @@ class: text-center
 
 
 ---
-hideInToc: true
+layout: center
 class: text-center
 ---
 
@@ -286,6 +286,7 @@ class: text-center
 
 
 ---
+layout: center
 class: text-center
 ---
 
@@ -318,12 +319,37 @@ class: text-center
 </div>
 
 ---
+layout: center
+class: text-center
+---
+
+# disclaimer: how do we effectively do microfrontends
+
+<div class="flex flex-col gap-4 mt-12 text-left text-lg">
+    
+<ul>
+<li v-click="1"><span v-mark.strike.white="6"><strong>iframes</strong> - Isolated contexts</span></li>
+<li v-click="2"><span v-mark.strike.white="7"><strong>web components</strong> - Custom elements</span></li>
+<li v-click="3"><span v-mark.strike.white="8"><strong>SPAs</strong> - Runtime loading</span></li>
+<li v-click="4"><span v-mark.circle.white="9"><strong>Module Federation / Import maps</strong> - Dynamic imports</span></li>
+</ul>
+</div>
+
+<div v-click="5" class="mt-4 text-xl text-green-400">
+
+**Key:** Runtime invocation ensures independent deployability
+</div>
+
+<!-- we are gonna focus on the modern approaches -->
+
+---
+layout: center
 class: text-center
 ---
 
 # The hidden costs of microfrontends
 
-<div class="flex flex-row gap-6 mt-16">
+<div class="flex flex-row flex-wrap gap-6 mt-16">
 
 <div class="flex-1">
   <div v-click>
@@ -360,8 +386,16 @@ class: text-center
 <div class="flex-1">
   <div v-click>
 
+  ## Deployment
+  #### duplicate ci&cd
+  </div>
+</div>
+    
+<div class="flex-1">
+  <div v-click>
+
   #### .. and more
-  ### *the books don't tell you*
+  ### *ai wont tell you*
   </div>
 </div>
 
@@ -371,12 +405,13 @@ class: text-center
 <!-- mention that debugging is still one of our biggest problems -->
 
 ---
-class: text-center
+layout: center
+class: text-center 
 ---
 
-# Problem 1: how do we ensure type safety?
+## Problem 1: how do we ensure type safety?
 
-<div class="flex flex-col gap-4 text-left">
+<div class="flex flex-col gap-2 text-left">
 
 <div v-click>
         
@@ -394,9 +429,12 @@ Runtime imports = No compile-time type checking
 
 <div v-click class="text-green-400">
 
-## Benefits
+### Benefits
+        
 ✓ Type checking during development
+        
 ✓ IDE autocomplete and IntelliSense
+        
 ✓ Independent runtime deployments
 </div>
 
@@ -405,23 +443,621 @@ Runtime imports = No compile-time type checking
 <!-- if we have runtime imports, it means we dont have typescript at compile time -->
 
 ---
-class: text-center
+layout: image
+image: /assets/demo-time.jpg
+---
+---
+layout: center
+class: text-center 
 ---
 
-# how do we effectively do microfrontends
+## Problem 2: what if components are slow to load?
 
-<div class="flex flex-col gap-4 mt-12 text-left text-lg">
-    
-<ul>
-<li v-click="1"><span v-mark.strike.white="6"><strong>iframes</strong> - Isolated contexts</span></li>
-<li v-click="2"><span v-mark.strike.white="7"><strong>web components</strong> - Custom elements</span></li>
-<li v-click="3"><span v-mark.strike.white="8"><strong>SPAs</strong> - Runtime loading</span></li>
-<li v-click="4"><span v-mark.circle.white="9"><strong>Module Federation / Import maps</strong> - Dynamic imports</span></li>
-</ul>
+<div class="flex flex-col gap-2 text-left">
+
+<div v-click>
+        
+### Problem
+Runtime imports = No compile-time type checking
 </div>
 
-<div v-click="5" class="mt-4 text-xl text-green-400">
+<div v-click>
 
-**Key:** Runtime invocation ensures independent deployability
+### Solution
+**Dual-mode approach:**
+- **Runtime**: Load ESM bundles from remote server (Module Federation)
+- **Compile-time**: Install npm package with **only `.d.ts` files**
 </div>
 
+<div v-click class="text-green-400">
+
+### Benefits
+        
+✓ Type checking during development
+        
+✓ IDE autocomplete and IntelliSense
+        
+✓ Independent runtime deployments
+</div>
+
+</div>
+
+<!-- if we have runtime imports, it means we dont have typescript at compile time -->
+
+---
+layout: two-cols
+---
+
+# Module Federation
+
+<div class="text-sm">
+
+**Webpack 5+ feature** for runtime code sharing
+
+### Key Concepts
+
+- **Host**: App consuming remote modules
+- **Remote**: App exposing modules
+- **Shared dependencies**: De-duplicated at runtime
+
+### Benefits
+
+✅ Runtime integration (no build-time coupling)<br>
+✅ Independent deployments<br>
+✅ Shared dependencies optimization<br>
+✅ Version management built-in
+
+</div>
+
+::
+
+<div class="text-sm mt-8">
+
+### How it works
+
+```mermaid
+graph LR
+    A[Host App] -->|loads| B[Remote Entry]
+    B -->|exposes| C[Components]
+    B -->|exposes| D[Services]
+    A -.shares.-> E[React/Vue]
+    B -.shares.-> E
+```
+
+<div class="mt-4 opacity-80">
+Remotes expose modules via manifest<br>
+Hosts consume them asynchronously<br>
+Shared deps loaded once
+</div>
+
+</div>
+
+---
+
+# Module Federation - Configuration
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+### Remote App (Product Catalog)
+
+```js {all|3-7|8-12|all}
+// webpack.config.js
+new ModuleFederationPlugin({
+  name: 'productCatalog',
+  filename: 'remoteEntry.js',
+  exposes: {
+    './ProductList': './src/ProductList',
+  },
+  shared: {
+    react: { singleton: true },
+    'react-dom': { singleton: true },
+  },
+})
+```
+
+</div>
+
+<div>
+
+### Host App (Main Shell)
+
+```js {all|3-6|7-11|all}
+// webpack.config.js
+new ModuleFederationPlugin({
+  name: 'shell',
+  remotes: {
+    productCatalog: 'productCatalog@http://localhost:3001/remoteEntry.js',
+  },
+  shared: {
+    react: { singleton: true },
+    'react-dom': { singleton: true },
+  },
+})
+```
+
+</div>
+
+</div>
+
+---
+
+# Module Federation - Usage
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+### Lazy Loading Remote
+
+```tsx {all|2|5-6|all}
+// App.tsx
+const ProductList = lazy(() => import('productCatalog/ProductList'));
+
+function App() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProductList />
+    </Suspense>
+  )
+}
+```
+
+<div class="mt-4 text-sm opacity-80">
+
+✨ Loaded at runtime<br>
+✨ Type-safe with proper setup<br>
+✨ Error boundaries recommended
+
+</div>
+
+</div>
+
+<div>
+
+### Dynamic Remotes
+
+```tsx {all|2-5|7-11|all}
+// Load remote dynamically
+const loadRemote = (url: string) => {
+  return import(/* webpackIgnore: true */ url)
+    .then(module => module.default)
+}
+
+// Usage
+loadRemote('http://cdn.example.com/remote.js')
+  .then(Component => {
+    // Render component
+  })
+```
+
+<div class="mt-4 text-sm opacity-80">
+
+⚡ Runtime flexibility<br>
+⚡ A/B testing friendly<br>
+⚡ Multi-tenant scenarios
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: two-cols
+---
+
+# Import Maps
+
+<div class="text-sm">
+
+**Browser-native** module resolution
+
+### Key Concepts
+
+- **No bundler required**
+- **Native ES modules**
+- **URL mapping for imports**
+- **Runtime dependency resolution**
+
+### Benefits
+
+✅ Simple and standard<br>
+✅ No build tool dependency<br>
+✅ CDN-friendly<br>
+✅ Works with any framework
+
+</div>
+
+::
+
+<div class="text-sm mt-8">
+
+### How it works
+
+```html
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18",
+    "app/": "/src/"
+  }
+}
+</script>
+```
+
+<div class="mt-4 opacity-80">
+Browser resolves bare imports<br>
+Maps to actual URLs<br>
+Native module loading
+</div>
+
+</div>
+
+---
+
+# Import Maps - Example
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+### HTML Setup
+
+```html {all|2-10|12-14|all}
+<!-- index.html -->
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "components/": "./components/"
+  }
+}
+</script>
+
+<script type="module">
+  import { render } from 'react-dom';
+  import App from 'components/App.js';
+
+  render(<App />, document.getElementById('root'));
+</script>
+```
+
+</div>
+
+<div>
+
+### Module Code
+
+```js
+// components/App.js
+import React from 'react';
+import { ProductList } from 'components/ProductList.js';
+
+export default function App() {
+  return (
+    <div>
+      <h1>My App</h1>
+      <ProductList />
+    </div>
+  )
+}
+```
+
+<div class="mt-4 text-sm opacity-80">
+
+✨ No bundler needed<br>
+✨ Works directly in browser<br>
+✨ Standard ES modules
+
+</div>
+
+</div>
+
+</div>
+
+---
+
+# Import Maps - Advanced Usage
+
+<div class="grid grid-cols-2 gap-4">
+
+<div>
+
+### Scoped Imports
+
+```json {all|4-9|all}
+{
+  "imports": {
+    "lodash": "https://esm.sh/lodash@4.17.21"
+  },
+  "scopes": {
+    "/admin/": {
+      "lodash": "https://esm.sh/lodash@4.17.20"
+    }
+  }
+}
+```
+
+<div class="mt-4 text-sm opacity-80">
+Different versions per path<br>
+Useful for migrations
+</div>
+
+</div>
+
+<div>
+
+### Integrity & Preloading
+
+```html
+<!-- Preload for performance -->
+<link rel="modulepreload"
+      href="https://esm.sh/react@18.2.0" />
+
+<!-- With integrity check -->
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0"
+  },
+  "integrity": {
+    "https://esm.sh/react@18.2.0": "sha384-xxx"
+  }
+}
+</script>
+```
+
+</div>
+
+</div>
+
+---
+
+# Module Federation vs Import Maps
+
+<div class="text-sm">
+
+| Feature | Module Federation | Import Maps |
+|---------|------------------|-------------|
+| **Build Tool** | Webpack 5+ required | None (browser native) |
+| **Complexity** | Higher learning curve | Simple, straightforward |
+| **Dependency Sharing** | Advanced (versions, singletons) | Basic (URL mapping) |
+| **Bundle Optimization** | Built-in optimization | Manual via CDN |
+| **Browser Support** | All (transpiled) | Modern browsers only |
+| **TypeScript** | Good support with setup | Requires build step for types |
+| **Runtime Loading** | Async chunks, optimized | Native ES modules |
+| **Team Independence** | High (separate builds) | High (separate deployments) |
+| **Versioning** | Semver aware | URL-based |
+| **Fallbacks** | Built-in strategies | Manual implementation |
+
+</div>
+
+---
+
+# When to Use What?
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+## Module Federation
+
+### ✅ Use when:
+
+- Using Webpack already
+- Need sophisticated dependency sharing
+- Complex version requirements
+- Want optimized bundles
+- Large teams with separate apps
+- Need SSR support
+
+### ❌ Avoid when:
+
+- Want simplicity over features
+- No build step desired
+- Small projects
+- Webpack not an option
+
+</div>
+
+<div>
+
+## Import Maps
+
+### ✅ Use when:
+
+- Want browser-native solution
+- No bundler preference
+- Simple dependency needs
+- Using CDN for everything
+- Modern browsers only OK
+- Rapid prototyping
+
+### ❌ Avoid when:
+
+- Need IE11 support
+- Complex dependency graphs
+- Want bundle optimization
+- Need SSR
+
+</div>
+
+</div>
+
+---
+
+# Module Federation + Vite: The Confusion
+
+<div class="text-sm">
+
+### The Problem: Webpack-only Feature
+
+Module Federation was built **for Webpack 5+** → Vite users had no official solution
+
+### The Solutions (Past & Present)
+
+<div class="grid grid-cols-3 gap-4 mt-4">
+
+<div class="border border-gray-600 rounded p-4">
+
+#### @originjs/vite-plugin-federation
+
+**Community Plugin** (2021)
+
+✅ First Vite MF solution<br>
+✅ Popular & battle-tested<br>
+🔶 Module Federation 1 only<br>
+❌ Not officially maintained<br>
+❌ MF2 support uncertain
+
+```bash
+npm i @originjs/vite-plugin-federation
+```
+
+</div>
+
+<div class="border border-gray-600 rounded p-4">
+
+#### @module-federation/vite
+
+**Official Plugin** (2023)
+
+✅ From MF team<br>
+✅ Better Vite integration<br>
+🔶 Module Federation 1 only<br>
+❌ MF2 not ready yet<br>
+⚠️ Still maturing
+
+```bash
+npm i @module-federation/vite
+```
+
+</div>
+
+<div class="border border-green-600 rounded p-4 bg-green-900/10">
+
+#### Rolldown + Vite
+
+**Future Built-in** (TBD)
+
+🚀 Rust-based bundler<br>
+🚀 Will replace Rollup in Vite<br>
+🚀 Native MF2 support planned<br>
+✨ No plugin needed<br>
+⏳ Under development
+
+</div>
+
+</div>
+
+</div>
+
+---
+
+# Module Federation Versions Timeline
+
+<div class="text-sm">
+
+```mermaid
+timeline
+    title Module Federation Evolution
+    2020 : Module Federation 1.0
+         : Webpack 5 release
+         : Runtime container sharing
+    2021 : @originjs/vite-plugin-federation
+         : Community fills the gap
+         : MF1 support for Vite
+    2023 : @module-federation/vite
+         : Official Vite plugin
+         : Still MF1 only
+         : Module Federation 2.0 announced
+         : Enhanced runtime, better DX
+    2024-2025 : Rolldown development
+              : Rust-based Rollup replacement
+              : Native MF2 planned
+              : Will be built into Vite
+```
+
+</div>
+
+---
+
+# What Should You Use Today?
+
+<div class="grid grid-cols-2 gap-8">
+
+<div>
+
+## For Webpack Projects
+
+### ✅ Built-in Module Federation
+
+```js
+// webpack.config.js
+new ModuleFederationPlugin({
+  // MF1 stable, MF2 available
+})
+```
+
+**Status:** ✅ Production ready<br>
+**MF Version:** 1.0 stable, 2.0 available<br>
+**Recommendation:** Use it!
+
+</div>
+
+<div>
+
+## For Vite Projects
+
+### 🤔 Choose Your Adventure
+
+**Option A: @originjs/vite-plugin-federation**
+- More mature, community battle-tested
+- MF1 only, uncertain MF2 future
+
+**Option B: @module-federation/vite**
+- Official plugin, better support path
+- Still maturing, MF1 only for now
+
+**Option C: Wait for Rolldown**
+- Native MF2 support
+- No plugin needed
+- ⏳ Timeline uncertain
+
+### 💡 Recommendation
+Use **@module-federation/vite** if you need it now, or **wait for Rolldown** if you can.
+
+</div>
+
+</div>
+
+---
+
+# The Key Differences: MF1 vs MF2
+
+<div class="text-sm">
+
+| Feature | Module Federation 1 | Module Federation 2 |
+|---------|-------------------|-------------------|
+| **Runtime** | Container-based | Enhanced runtime with better error handling |
+| **Developer Experience** | Basic tooling | Improved DX, better TypeScript support |
+| **Performance** | Good | Optimized loading strategies |
+| **Build Tools** | Webpack 5 | Webpack 5, Rspack, (Rolldown planned) |
+| **Type Safety** | Manual setup | Better native support |
+| **Debugging** | Challenging | Improved error messages & dev tools |
+| **Vite Support** | Via plugins | Native (when Rolldown lands) |
+
+</div>
+
+<div class="mt-4 p-4 bg-yellow-900/20 border border-yellow-600 rounded">
+
+### ⚠️ Bottom Line
+
+**Webpack users:** MF is ready (use MF2)<br>
+**Vite users:** Use plugins (MF1) now, or wait for Rolldown (MF2 native)<br>
+**Starting new?** Consider if you really need MF, or if simpler solutions work
+
+</div>
