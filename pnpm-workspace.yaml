@@ -3,6 +3,7 @@ packages:
   - "microfrontend"
   - "vim-rabbit-hole"
   - "why-no-microfrontend"
+  - "typescript-is-fun"
 catalogs:
   prettier:
     "prettier": "^3.7.4"

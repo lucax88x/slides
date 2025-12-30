@@ -17,20 +17,17 @@ src: ../shared/me.md
 ---
 imported slide
 ---
+layout: center
+class: text-center
 ---
 
 # What is the microfrontends architecture?
 <br>
 
-<div class="text-xl" v-click.hide="2">
+<div >
     
-## ❝ An architectural style where <br>  independently deliverable <span v-mark.circle.white="1">frontend applications</span><br> are composed into a greater whole. ❞ <br>
+## ❝ An architectural style where <br>  independently deliverable <span v-mark.strike.white="[1]" v-click.hide="2">frontend applications</span><span v-click.show="2" v-mark.circle.white="2">services</span><br> are composed into a greater whole. ❞ <br>
 ### ~ Martin Fowler
-</div>
-
-<div class="text-xl" v-click.show="2">
-    
-❝ An architectural style where <br>  independently deliverable <span v-mark.circle.white="0">services</span> <br> are composed into a greater whole. ❞ <br>
 </div>
 
 ---
@@ -74,6 +71,11 @@ layout: two-cols
  - Runtime invocation
  </v-click>
 
+<v-click at="13">
+
+ - Sync/Async comms (rest/event)
+ </v-click>
+
 ::right::
 
 # Microfrontends
@@ -85,7 +87,7 @@ layout: two-cols
 </v-click>
 <v-click at="4">
 
- - Own bundle
+ - Own api
 </v-click>
 <v-click at="6">
 
@@ -103,6 +105,11 @@ layout: two-cols
 
  - Runtime import
 </v-click>
+
+<v-click at="14">
+
+ - Async comms (event doms)
+ </v-click>
 
 ---
 layout: center
@@ -150,28 +157,39 @@ class: text-center
 <div class="flex flex-row gap-8 mt-16">
 <div v-click class="flex-1">
 
-  ## Teams
+  ### Teams
   #### independent teams
+  ⚠️
 </div>
 <div v-click class="flex-1">
 
-  ## Modules
+  ### Modules 
   #### clear domain boundaries
+  ✅
 </div>
 <div v-click class="flex-1">
 
-  ## Releases
+  ### Releases
   #### independent deployments
+  ✅
 </div>
 <div v-click class="flex-1">
 
-  ## Reusability
+  ### Reusability
   #### shared components
+  ✅
 </div>
 <div v-click class="flex-1">
 
-  ## Technology
+  ### Technology
   #### flexibility
+  ✅
+</div>
+<div v-click class="flex-1">
+
+  ### Scalability 
+  #### performance
+  ❌
 </div>
 </div>
 
@@ -185,6 +203,7 @@ class: text-center
 
 
 ---
+hide: true
 layout: center
 class: text-center
 ---
@@ -219,6 +238,7 @@ class: text-center
 
 
 ---
+hide: true
 layout: center
 class: text-center
 ---
@@ -252,6 +272,7 @@ class: text-center
 
 
 ---
+hide: true
 layout: center
 class: text-center
 ---
@@ -286,6 +307,7 @@ class: text-center
 
 
 ---
+hide: true
 layout: center
 class: text-center
 ---
@@ -317,6 +339,113 @@ class: text-center
 </div>
 
 </div>
+
+---
+layout: center
+class: text-center
+---
+
+# Shell Responsibilities
+
+<div class="flex flex-row gap-8 mt-16">
+<div v-click class="flex-1">
+
+  ### Routing
+  #### Managing navigation between microfrontends
+</div>
+<div v-click class="flex-1">
+
+  ### Composition 
+  #### Loading and orchestrating multiple MFs
+</div>
+<div v-click class="flex-1">
+
+  ### Authentication
+  #### Handling user auth and session management
+</div>
+<div v-click class="flex-1">
+
+  ### Shared Context
+  #### providing common state and services
+</div>
+</div>
+
+---
+layout: center
+---
+
+# Cartella Clinica Architecture
+
+```mermaid
+graph TB
+    NPM[("NPM Registry<br/>📦")]
+
+    subgraph "Module Servers (run-time)"
+        UI["@epd/module/ui<br/>(Lit)<br/>🏝️ Server 1"]
+        FHIR["@epd/module/fhir<br/>(React)<br/>🏝️ Server 2"]
+    end
+
+    subgraph "Shell Servers (run-time)"
+        PATIENT["@epd/shell/patient<br/>(React)<br/>🏝️ Server 3"]
+        PRACTITIONER["@epd/shell/practitioner<br/>(React)<br/>🏝️ Server 4"]
+        ADMINS["@epd/shell/admins<br/>(React)<br/>🏝️ Server 5"]
+    end
+
+    NPM -.->|"compile-time<br/>@epd/shared/auth"| PATIENT
+    NPM -.->|"compile-time<br/>@epd/shared/auth"| PRACTITIONER
+    NPM -.->|"compile-time<br/>@epd/shared/auth"| ADMINS
+    NPM -.->|"compile-time<br/>types & skeletons"| PATIENT
+    NPM -.->|"compile-time<br/>types & skeletons"| PRACTITIONER
+    NPM -.->|"compile-time<br/>types & skeletons"| ADMINS
+
+    UI ==>|"run-time<br/>remote module"| PATIENT
+    UI ==>|"run-time<br/>remote module"| PRACTITIONER
+    UI ==>|"run-time<br/>remote module"| ADMINS
+    FHIR ==>|"run-time<br/>remote module"| PATIENT
+    FHIR ==>|"run-time<br/>remote module"| PRACTITIONER
+    FHIR ==>|"run-time<br/>remote module"| ADMINS
+
+    classDef npmStyle fill:#f9f,stroke:#333,stroke-width:2px
+    classDef moduleStyle fill:#bbf,stroke:#333,stroke-width:2px
+    classDef shellStyle fill:#bfb,stroke:#333,stroke-width:2px
+
+    class NPM npmStyle
+    class UI,FHIR moduleStyle
+    class PATIENT,PRACTITIONER,ADMINS shellStyle
+```
+
+---
+layout: default
+---
+
+# 3 Ways of Importing React Components
+
+<v-clicks>
+
+## 1. ESM Import
+```tsx
+import { Component } from './component'
+```
+- Blocks render until loaded
+- No skeleton/spinner capability
+
+## 2. React.lazy + Suspense
+```tsx
+const Component = lazy(() => import('./component'))
+<Suspense fallback={<Skeleton />}><Component /></Suspense>
+```
+- ESM import with loading state
+- Built-in skeleton support
+
+## 3. Module Federation Runtime
+```tsx
+const [Component, setComponent] = useState(null)
+useEffect(() => { loadRemote('app/Component').then(setComponent) }, [])
+```
+- Dynamic remote loading
+- Custom skeleton component control
+
+</v-clicks>
 
 ---
 layout: center
@@ -446,6 +575,7 @@ Runtime imports = No compile-time type checking
 layout: image
 image: /assets/demo-time.jpg
 ---
+
 ---
 layout: center
 class: text-center 
@@ -483,6 +613,55 @@ Runtime imports = No compile-time type checking
 </div>
 
 <!-- if we have runtime imports, it means we dont have typescript at compile time -->
+
+---
+layout: image
+image: /assets/demo-time.jpg
+---
+
+---
+layout: center
+class: text-center 
+---
+
+## Problem 3: who owns the skeleton?
+
+
+<div class="flex flex-col gap-2 text-left">
+
+<div v-click>
+        
+### Problem
+Runtime imports = No compile-time type checking
+</div>
+
+<div v-click>
+
+### Solution
+**Dual-mode approach:**
+- **Runtime**: Load ESM bundles from remote server (Module Federation)
+- **Compile-time**: Install npm package with **only `.d.ts` files**
+</div>
+
+<div v-click class="text-green-400">
+
+### Benefits
+        
+✓ Type checking during development
+        
+✓ IDE autocomplete and IntelliSense
+        
+✓ Independent runtime deployments
+</div>
+
+</div>
+
+<!-- show demo of double skeleton issue -->
+
+---
+layout: image
+image: /assets/demo-time.jpg
+---
 
 ---
 layout: two-cols

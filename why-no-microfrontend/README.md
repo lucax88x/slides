@@ -1,4 +1,10 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Why you shouldn't use microfrontends
+
+Microfrontends are often presented as the silver bullet for scaling frontend development, but they can easily introduce more complexity than they solve. 
+We'll explore the critical questions to ask before adopting microfrontends, identifying the specific scenarios where they provide real value. 
+The talk includes a technical deep-dive into Module Federation, showcasing practical implementation strategies with modern tools like Vite and a glimpse at future tooling possibilities.
+
+## Welcome to [Slidev](https://github.com/slidevjs/slidev)!
 
 To start the slide show:
 
